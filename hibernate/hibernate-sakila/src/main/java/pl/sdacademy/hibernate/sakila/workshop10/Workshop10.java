@@ -35,7 +35,11 @@ public class Workshop10 {
         final EntityManager em = emf.createEntityManager();
 
         try {
-            //TODO
+            em.getTransaction().begin();
+
+            em.persist(country);
+
+            em.getTransaction().commit();
         }
         finally {
             emf.close();
