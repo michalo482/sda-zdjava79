@@ -36,6 +36,21 @@ public class Workshop8b {
     }
 
     public static List<Country> findAllCountries() {
-        throw new UnsupportedOperationException("TODO");
+        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("SakilaPU");
+        final EntityManager em = emf.createEntityManager();
+
+        try {
+            TypedQuery<Country> countriesQuesry = em.createQuery(
+                    "SELECT c FROM Country c JOIN FETCH c.cities cit JOIN FETCH cit.addresses ORDER BY c.name", Country.class
+                    );
+
+            List<Country> resultList = countriesQuesry.getResultList();
+            String countriesString = countriesToString(resultList);
+
+            return resultList;
+
+        } finally {
+            emf.close();
+        }
     }
 }
