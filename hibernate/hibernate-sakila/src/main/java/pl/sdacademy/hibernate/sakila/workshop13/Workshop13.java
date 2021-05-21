@@ -34,7 +34,17 @@ public class Workshop13 {
         final EntityManager em = emf.createEntityManager();
 
         try {
-            throw new UnsupportedOperationException("TODO");
+            Country country = new Country();
+            country.setCountryId(countryId);
+            country.setName(countryName);
+
+            em.getTransaction().begin();
+
+            Country mergedCountry = em.merge(country);
+
+            em.getTransaction().commit();
+
+            return mergedCountry;
         }
         finally {
             emf.close();

@@ -1,6 +1,7 @@
 package pl.sdacademy.hibernate.sakila.workshop15;
 
 import pl.sdacademy.hibernate.sakila.workhop6.City;
+import pl.sdacademy.hibernate.sakila.workhop6.Country;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,7 +34,20 @@ public class Workshop15 {
         final EntityManager em = emf.createEntityManager();
 
         try {
-            throw new UnsupportedOperationException("TODO");
+            Country country = new Country();
+            country.setName(countryName);
+
+            City city = new City();
+            city.setCountry(country);
+            city.setName(cityName);
+
+            em.getTransaction().begin();
+
+            em.persist(city);
+
+            em.getTransaction().commit();
+
+            return city;
         }
         finally {
             emf.close();

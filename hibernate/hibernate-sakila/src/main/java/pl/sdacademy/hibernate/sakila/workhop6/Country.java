@@ -26,6 +26,12 @@ public class Country {
         this.cities = cities;
     }
 
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
+
+
+
     public int getCountryId() {
         return countryId;
     }

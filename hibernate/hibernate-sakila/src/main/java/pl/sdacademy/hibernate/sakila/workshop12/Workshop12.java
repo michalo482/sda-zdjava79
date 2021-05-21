@@ -1,8 +1,11 @@
 package pl.sdacademy.hibernate.sakila.workshop12;
 
+import pl.sdacademy.hibernate.sakila.workhop6.Country;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import java.util.Scanner;
 
 /**
@@ -33,7 +36,19 @@ public class Workshop12 {
         final EntityManager em = emf.createEntityManager();
 
         try {
-            //TODO
+            Country country = em.find(Country.class, countryId);
+
+            if (country == null) {
+                return false;
+            }
+
+            em.getTransaction().begin();
+
+            country.setName(countryName);
+
+            em.getTransaction().commit();
+
+
         }
         finally {
             emf.close();
